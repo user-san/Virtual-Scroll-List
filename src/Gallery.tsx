@@ -21,7 +21,7 @@ export const Gallery = () => {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log(entries);
+        // console.log(entries);
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("show");
@@ -32,7 +32,7 @@ export const Gallery = () => {
       },
       {
         threshold: 0,
-        rootMargin:"0px 0px -200px 0px",
+        rootMargin: "0px 0px -200px 0px",
       }
     );
 
