@@ -1,54 +1,55 @@
-# React + TypeScript + Vite
+# 🚀 Virtual Scroll List with Infinite Querying & Gallery Animation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance React application that renders **large product datasets efficiently** using **virtualization** and **infinite querying from TanStack**, while using the **Intersection Observer API only for gallery animation effects**.
 
-Currently, two official plugins are available:
+This project is designed to solve real-world performance issues such as DOM overloading, scroll lag, and excessive re-renders when dealing with huge lists.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🧩 Project Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Feature | Technology |
+|-------|------------|
+| Virtual Scroll List | `useVirtualizer` – TanStack Virtual |
+| Infinite API Fetching | `useInfiniteQuery` – TanStack Query |
+| Gallery Animations | Raw `IntersectionObserver` |
+| Rendering Strategy | DOM Virtualization |
+| Styling | CSS Transitions |
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ✨ Key Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+♻️ **Infinite Querying with TanStack**  
+Products are fetched page-by-page using `useInfiniteQuery`, eliminating large upfront data loads.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+🧠 **DOM Virtualization Engine**  
+`useVirtualizer` renders only the items visible in the viewport — even with thousands of products.
+
+🖼️ **Scroll-Triggered Gallery Animations**  
+Raw `IntersectionObserver` updates animation classes using `classList.add()` / `remove()`.
+
+⚡ **Zero Scroll Event Listeners**  
+All heavy scroll logic is replaced with browser-optimized APIs.
+
+🛡️ **Memory-Safe Lifecycle Handling**  
+Observers and query streams are disconnected cleanly to avoid leaks.
+
+---
+
+
+
+## ⚙️ How It Works
+
+1. Initial product page loads using `useInfiniteQuery`.  
+2. `useVirtualizer` calculates visible item range and renders only those nodes.  
+3. As the user scrolls, virtualizer updates the visible slice dynamically.  
+4. Gallery images use `IntersectionObserver` to toggle CSS classes for animations.  
+5. When the end of the list is reached, `useInfiniteQuery` fetches the next API page.
+
+---
+
+## 📸 Preview
+
+<img width="1485" height="1241" alt="image" src="https://github.com/user-attachments/assets/2dcad7fa-e24d-49c4-8789-deb5f56d9912" />
+
